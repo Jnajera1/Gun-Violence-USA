@@ -5,7 +5,7 @@
    - [Firearms Provisions in US States](https://www.kaggle.com/jboysen/state-firearms)
       - ![MetaData](images/metadata_gunprovisions.png)
    - [Gun Violence Data](https://www.kaggle.com/jameslko/gun-violence-data)
-      - ![MetaData](images/metadata_gunviolence)
+      - ![MetaData](images/metadata_gunviolence.png)
    - [NICS Gun Purchase Background Checks](https://cran.r-project.org/web/packages/gunsales/README.html)
    - [Firearms Commerce in the United States](datasets/firearms_commerce_us.pdf)
 3. 3 or 4 screenshots of relevant, ‘inspiring’ visualizations that frame your creative fodder
