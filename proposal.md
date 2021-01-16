@@ -20,5 +20,9 @@
    - ![Close-up on Indiana](images/indiana_closeup.png)
       - Close up on IN
 4. A sketch of the final design
+   - Clean-up and align our datasets
+   - Upload into our database of choice
+   - Create and map our data into interactive visualizations
+   - Form conclusion
 5. A link to the primary GitHub repository you’ll be housing your work in.
    -[GitHub Repo](https://github.com/Mquinton28/Project-2---Group-E)
