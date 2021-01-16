@@ -8,8 +8,11 @@
       - ![MetaData](images/metadata_gunviolence.png)
    - [NICS Gun Purchase Background Checks](https://cran.r-project.org/web/packages/gunsales/README.html)
    - [Firearms Commerce in the United States](datasets/firearms_commerce_us.pdf)
+   - [CDC - Firearm Mortality in the US](https://www.cdc.gov/nchs/pressroom/sosmap/firearm_mortality/firearm.htm)
 3. 3 or 4 screenshots of relevant, ‘inspiring’ visualizations that frame your creative fodder
    - ![Heat Map - Violence vs. Gun Sales](images/heatmap.png)
+   - ![Interactive Popup Map](images/interactive_us_map.png)
+   - ![Gun Sales - Bar Chart](images/gun_sales_bar.png)
 4. A sketch of the final design
 5. A link to the primary GitHub repository you’ll be housing your work in.
    -[GitHub Repo](https://github.com/Mquinton28/Project-2---Group-E)
