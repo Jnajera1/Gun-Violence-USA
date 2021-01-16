@@ -1,5 +1,6 @@
-### Group E - Gabe New, Maria Quinton, Jeremy Najera
+### Group E - Gabriel New, Maria Quinton, Jeremy Najera
 1. A brief articulation of your chosen topic and rationale
+   - We chose to analyze gun sales in the United States and how it affects gun violence. Our rationale in choosing this topic was the current political, economic        and social climates in the U.S.
 2. A link to your data set(s) and a screenshot of the metadata if it exists
 3. 3 or 4 screenshots of relevant, ‘inspiring’ visualizations that frame your creative fodder
 4. A sketch of the final design
