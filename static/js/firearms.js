@@ -11,14 +11,18 @@
 var svgWidth = 960;
 var svgHeight = 500;
 
-var margin = { top: 20, right: 40, bottom: 60, left: 50 };
+var margin = {
+  top: 20,
+  right: 40,
+  bottom: 60,
+  left: 100
+};
 
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
-var svg = d3
-  .select("body")
+var svg = d3.select(".chart")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -26,89 +30,93 @@ var svg = d3
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-// Import data from an external CSV file
-d3.csv("/datasets/reduced_firearms").then(function(firearmsData) {
-  console.log(firearmsData);
-  console.log([firearmsData]);
+// Import Data
+d3.csv("/datasets/reduced_firearms.csv").then(function(firearmsData) {
 
-  // Create a function to parse date and time
-  var parseTime = d3.timeParse("%b-%Y");
+    // Step 1: Parse Data/Cast as numbers
+    // ==============================
+    firearmsData.forEach(function(data) {
+      data.date = +data.date;
+      data.totals = +data.totals;
+    });
 
-  // Format the data
-  firearmsData.forEach(function(data) {
-    data.month = parseTime(data.month);
-    data.state = +data.state;
-    data.totals = +data.totals;
+    // Step 2: Create scale functions
+    // ==============================
+    var xLinearScale = d3.scaleLinear()
+      .domain([20, d3.max(firearmsData, d => d.date)])
+      .range([0, width]);
+
+    var yLinearScale = d3.scaleLinear()
+      .domain([0, d3.max(firearmsData, d => d.totals)])
+      .range([height, 0]);
+
+    // Step 3: Create axis functions
+    // ==============================
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
+
+    // Step 4: Append Axes to the chart
+    // ==============================
+    chartGroup.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(bottomAxis);
+
+    chartGroup.append("g")
+      .call(leftAxis);
+
+    // Step 5: Create Circles
+    // ==============================
+    var circlesGroup = chartGroup.selectAll("circle")
+    .data(firearmsData)
+    .enter()
+    .append("circle")
+    .attr("cx", d => xLinearScale(d.date))
+    .attr("cy", d => yLinearScale(d.totals))
+    .attr("r", "15")
+    .attr("fill", "pink")
+    .attr("opacity", ".5");
+
+    // Step 6: Initialize tool tip
+    // ==============================
+    var toolTip = d3.tip()
+      .attr("class", "tooltip")
+      .offset([80, -60])
+      .html(function(d) {
+        return (`${d.state}<br>State: ${d.date}<br>Number of Permits: ${d.totals}`);
+      });
+
+    // Step 7: Create tooltip in the chart
+    // ==============================
+    chartGroup.call(toolTip);
+
+    // Step 8: Create event listeners to display and hide the tooltip
+    // ==============================
+    circlesGroup.on("mouseover", function(data) {
+      toolTip.show(data, this);
+    })
+
+    // OR circlesGroup.on("click", function(data) {
+    //   toolTip.show(data, this);
+    // })
+    
+      // onmouseout event
+      .on("mouseout", function(data, index) {
+        toolTip.hide(data);
+      });
+
+    // Create axes labels
+    chartGroup.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left + 40)
+      .attr("x", 0 - (height / 2))
+      .attr("dy", "1em")
+      .attr("class", "axisText")
+      .text("Total Firearm Permits");
+
+    chartGroup.append("text")
+      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+      .attr("class", "axisText")
+      .text("Date");
+  }).catch(function(error) {
+    console.log(error);
   });
-
-  // Create scaling functions
-  var xTimeScale = d3.scaleTime()
-    .domain(d3.extent(firearmsData, d => d.month))
-    .range([0, width]);
-
-  var yLinearScale1 = d3.scaleLinear()
-    .domain([0, d3.max(firearmsData, d => d.state)])
-    .range([height, 0]);
-
-  var yLinearScale2 = d3.scaleLinear()
-    .domain([0, d3.max(firearmsData, d => d.totals)])
-    .range([height, 0]);
-
-  // Create axis functions
-  var bottomAxis = d3.axisBottom(xTimeScale)
-    .tickFormat(d3.timeFormat("%b-%Y"));
-  var leftAxis = d3.axisLeft(yLinearScale1);
-  var rightAxis = d3.axisRight(yLinearScale2);
-
-  // Add x-axis
-  chartGroup.append("g")
-    .attr("transform", `translate(0, ${height})`)
-    .call(bottomAxis);
-
-  // Add y1-axis to the left side of the display
-  chartGroup.append("g")
-    // Define the color of the axis text
-    .classed("green", true)
-    .call(leftAxis);
-
-  // Add y2-axis to the right side of the display
-  chartGroup.append("g")
-    // Define the color of the axis text
-    .classed("blue", true)
-    .attr("transform", `translate(${width}, 0)`)
-    .call(rightAxis);
-
-  // Line generators for each line
-  var line1 = d3.line()
-    .x(d => xTimeScale(d.month))
-    .y(d => yLinearScale1(d.state));
-
-  var line2 = d3.line()
-    .x(d => xTimeScale(d.month))
-    .y(d => yLinearScale2(d.totals));
-
-  // Append a path for line1
-  chartGroup.append("path")
-    .data([firearmsData])
-    .attr("d", line1)
-    .classed("line green", true);
-
-  // Append a path for line2
-  chartGroup.append("path")
-    .data([firearmsData])
-    .attr("d", line2)
-    .classed("line blue", true);
-
-  // Append axes titles
-  chartGroup.append("text")
-  .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
-    .classed("violence-text text", true)
-    .text("Gun Violence Incidents");
-
-  chartGroup.append("text")
-  .attr("transform", `translate(${width / 2}, ${height + margin.top + 37})`)
-    .classed("firearms-text text", true)
-    .text("Firearm Sales");
-}).catch(function(error) {
-  console.log(error);
-});
