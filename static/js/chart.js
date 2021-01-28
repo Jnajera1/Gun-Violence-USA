@@ -1,4 +1,4 @@
-/var svgWidth = 960;
+var svgWidth = 960;
 var svgHeight = 500;
 
 var margin = {
@@ -21,7 +21,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   // Import Data
-  d3.csv('datasets/reduced_gun_violence.csv').then(function(violenceData) {
+  d3.csv('datasets/reduced_gun_violence.csv').then(function(Data) {
     violenceData.forEach(function(data) {
       data.date = +data.date;
       data.state = +data.state;
@@ -53,7 +53,7 @@ var chartGroup = svg.append("g")
       .call(leftAxis);
 
       var circlesGroup = chartGroup.selectAll("circle")
-      .data(violenceData)
+      .data(Data)
       .enter()
       .append("circle")
       .attr("cx", d => xLinearScale(d.state))

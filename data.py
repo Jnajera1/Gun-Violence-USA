@@ -1,5 +1,6 @@
 def get_db_data():
     # Connect to database
+    
 
     # Query data
 

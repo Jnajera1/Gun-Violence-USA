@@ -1,6 +1,11 @@
 from flask import Flask, render_template, jsonify
 import data
-
+import numpy as np
+import sqlalchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine, func
+import psycopg2
 
 app = Flask(__name__, 
             static_folder='static',
@@ -14,7 +19,8 @@ def home():
 
 @app.route('/db_data', methods=['GET'])
 def database_data():
-    # data = data.get_db_data()
+    # 
+    return jsonify(all_names)
     data = {"this": "is my database data"}
     return jsonify(data)
 

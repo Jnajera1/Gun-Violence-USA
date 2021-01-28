@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>leaflet-map-csv</title>
+  <title>Gun Violence in US Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
 
@@ -30,8 +30,8 @@
 
   // Set up initial map center and zoom level
   var map = L.map('map', {
-    center: [41.57, -72.69], // EDIT latitude, longitude to re-center map
-    zoom: 10,  // EDIT from 1 to 18 -- decrease to zoom out, increase to zoom in
+    center: [39.82, -98.58], // EDIT latitude, longitude to re-center map
+    zoom: 5,  // EDIT from 1 to 18 -- decrease to zoom out, increase to zoom in
     scrollWheelZoom: false,
     tap: false
   });
@@ -57,8 +57,7 @@
   // see more basemap options at https://leaflet-extras.github.io/leaflet-providers/preview/
 
   // Read markers data from data.csv
-
-  $.get('datasets/gun_violence.csv', function(csvString) {
+  $.get('datasets/combined_data.csv', function(csvString) {
 
     // Use PapaParse to convert string to array of objects
     var data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
@@ -68,9 +67,9 @@
     for (var i in data) {
       var row = data[i];
 
-      var marker = L.marker([row.latitude, row.longitude], {
+      var marker = L.marker([row.lat, row.long], {
         opacity: 1
-      }).bindPopup(row.incident_characteristics);
+      }).bindPopup(row.characteristics);
       
       marker.addTo(map);
     }
@@ -78,7 +77,7 @@
   });
 
   map.attributionControl.setPrefix(
-    'View <a href="https://github.com/HandsOnDataViz/leaflet-map-csv" target="_blank">code on GitHub</a>'
+    'View <a href="datasets/combined_data.csv" target="_blank">code on GitHub</a>'
   );
 
   </script>
