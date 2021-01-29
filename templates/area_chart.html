@@ -1,9 +1,3 @@
-<!-- {% extends "base.html" %}
-{% block main %}
-<h1>
-    Viz 2
-</h1>
-{% endblock %} -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,20 +14,29 @@
    var firearmChart = new Chart(ctx, {
       type: 'line',
          data: {
-            labels: ["2017-01", "2017-12","2018-01", "2018-12", "2019-01", "2019-12", "2020-01", "2020-12"],
             datasets: [
                { label: 'Firearm Permits Granted',
-               data: [2032108,2575486,1996721,2517286,2150322, 2898501, 2652263, 3904879],
+               data: [11134651, 9941684, 10229162, 6482780, 6027166],
                backgroundColor :['rgba(255, 129, 102, 1)',
                'rgba(234, 162, 235, 1)',
                'rgba(255, 206, 36, 1)',
                'rgba(75, 192, 192, 1)',
                'rgba(153, 102, 255, 1)',
             ],
-         }
-      ]
+            order: 1
+         }, { type: 'line',
+         label: 'Gun Deaths in the US',
+         data: [15119,15704, 14879, 39525, 43490, 3334], 
+         backgroundColor: ['rgba(63, 127, 191, 1)',
+               'rgba(68, 128, 1)'],
+         order: 2
+         }],
+         labels: ["2016", "2017", "2018", "2019","2020", "2021"],
    },
    options: {
+      title: {
+            display: true,
+            text: 'Firearm Permits vs Gun Violence Deaths in the US'},
       scales: {
          yAxes: [{
             ticks: {
