@@ -5,7 +5,16 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
-import psycopg2
+# import psycopg2
+
+# DB Connection
+connection_string = "postgres:postgres@localhost:5432/postgres"
+engine = create_engine(f'postgresql://{connection_string}')
+
+Base = automap_base()
+Base.prepare(engine, reflect=True)
+
+gun_violence = Base.classes.violence
 
 app = Flask(__name__, 
             static_folder='static',
@@ -19,7 +28,18 @@ def home():
 
 @app.route('/db_data', methods=['GET'])
 def database_data():
-    # 
+    session = Session(engine)
+    Results = (session.query(gun_violence.date, gun_violence.characteristics)
+    .orderby(Measurement.date))
+
+    violence_characteristics = []
+    for row in results:
+        gun_dict = {}
+        gun_dict["date"] = row.date
+        gun_dict["characteristics"] = row.characteristics
+        violence_characteristics.append(gun_dict)
+
+    return jsonify(violence_characteristics)
     return jsonify(all_names)
     data = {"this": "is my database data"}
     return jsonify(data)
