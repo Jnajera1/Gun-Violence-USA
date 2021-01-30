@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Maria Quinton, Gabe New, Jeremy Najera">
+    <title>Sample of Our Data</title>
+
+
+  <!--CSS & Bootstrap Link-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" integrity="sha384-nNK9n28pDUDDgIiIqZ/MiyO3F4/9vsMtReZK39klb/MtkZI3/LtjSjlmyVPS3KdN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <!-- D3 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.4.0/d3.js" integrity="sha512-nUKG/5WjpjShkRZ7hidJ+GhtjnTbQV+IGf0c3KZCsOyqLPSzzzHzJ6QE57GPFA/WsE6nOKuGDlSXlrBxGELtOA==" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="base.html">Gun Violence Data</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="base.html">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  Plots
+                </a> -->
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/templates/area_chart.html">Area Chart</a>
+                  <a class="dropdown-item" href="/templates/map.html">Map</a>
+                  <!-- <a class="dropdown-item" href="cloudiness.html">Cloudiness</a>
+                  <a class="dropdown-item" href="windiness.html">Wind Speed</a> -->
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/templates/mulit-line.html">Comparison</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="data.html">Data</a>
+              </li>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+ <!--Content-->
+ <div class="container">
+   <div class="row">
+     <div class="col-md-8">
+       <h1>Gun Violence Combined Data </h1>
+       <p style="color: white">This is a sample of the data used for our project.</p>
+     </div>
+     <div class="table-responsive-lg">
+      <table class="table table-striped">
+        <table border="1" class="dataframe">
+          <thead>
+            <tr style="text-align: right;">
+              <th></th>
+              <th>Date</th>
+              <th>State</th>
+              <th>Characteristics</th>
+              <th>Latitude</th>
+              <th>Logitude</th>
+              <th>state_firearms</th>
+              <th>permit</th>
+              <th>permit_recheck</th>
+              <th>handgun</th>
+              <th>long_gun</th>
+              <th>other</th>
+              <th>multiple</th>
+              <th>totals</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <th>0</th>
+                <td>2017-11-01</td>
+                <td>South Carolina</td>
+                <td>Non-Shooting Incident||Home Invasion||Home Invasion - No death or injury||Kidnapping/abductions/hostage||Possession of gun by felon or prohibited person||Brandishing/flourishing/open carry/lost/found||Assault weapon (AR-15, AK-47, and ALL variants defined by law enforcement)</td>
+                <td>33.9615</td>
+                <td>-78.8077</td>
+                <td>Alabama</td>
+                <td>21670.0</td>
+                <td>400.0</td>
+                <td>9927.0</td>
+                <td>11675.0</td>
+                <td>292.0</td>
+                <td>483</td>
+                <td>47418</td>
+              </tr>
+              <tr>
+                <th>1</th>
+                <td>2017-11-01</td>
+                <td>South Carolina</td>
+                <td>Non-Shooting Incident||Home Invasion||Home Invasion - No death or injury||Kidnapping/abductions/hostage||Possession of gun by felon or prohibited person||Brandishing/flourishing/open carry/lost/found||Assault weapon (AR-15, AK-47, and ALL variants defined by law enforcement)</td>
+                <td>33.9615</td>
+                <td>-78.8077</td>
+                <td>Alaska</td>
+                <td>336.0</td>
+                <td>7.0</td>
+                <td>3132.0</td>
+                <td>3244.0</td>
+                <td>261.0</td>
+                <td>226</td>
+                <td>7527</td>
+              </tr>
+              <tr>
+                <th>2</th>
+                <td>2017-11-01</td>
+                <td>South Carolina</td>
+                <td>Non-Shooting Incident||Home Invasion||Home Invasion - No death or injury||Kidnapping/abductions/hostage||Possession of gun by felon or prohibited person||Brandishing/flourishing/open carry/lost/found||Assault weapon (AR-15, AK-47, and ALL variants defined by law enforcement)</td>
+                <td>33.9615</td>
+                <td>-78.8077</td>
+                <td>Arizona</td>
+                <td>5857.0</td>
+                <td>459.0</td>
+                <td>13763.0</td>
+                <td>10322.0</td>
+                <td>1092.0</td>
+                <td>851</td>
+                <td>34541</td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td>2017-11-01</td>
+                <td>South Carolina</td>
+                <td>Non-Shooting Incident||Home Invasion||Home Invasion - No death or injury||Kidnapping/abductions/hostage||Possession of gun by felon or prohibited person||Brandishing/flourishing/open carry/lost/found||Assault weapon (AR-15, AK-47, and ALL variants defined by law enforcement)</td>
+                <td>33.9615</td>
+                <td>-78.8077</td>
+                <td>Arkansas</td>
+                <td>2622.0</td>
+                <td>723.0</td>
+                <td>6981.0</td>
+                <td>11574.0</td>
+                <td>237.0</td>
+                <td>566</td>
+                <td>26049</td>
+              </tr>
+              <tr>
+                <th>4</th>
+                <td>2017-11-01</td>
+                <td>South Carolina</td>
+                <td>Non-Shooting Incident||Home Invasion||Home Invasion - No death or injury||Kidnapping/abductions/hostage||Possession of gun by felon or prohibited person||Brandishing/flourishing/open carry/lost/found||Assault weapon (AR-15, AK-47, and ALL variants defined by law enforcement)</td>
+                <td>33.9615</td>
+                <td>-78.8077</td>
+                <td>California</td>
+                <td>54897.0</td>
+                <td>0.0</td>
+                <td>44710.0</td>
+                <td>35910.0</td>
+                <td>4241.0</td>
+                <td>0</td>
+                <td>140695</td>
+              </tr>
+          </tbody>
+        </table>
+      </table>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</html>
